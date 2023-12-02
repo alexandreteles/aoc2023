@@ -26,17 +26,27 @@ def extract_first_and_last_digits(input_string: str) -> int:
     Returns:
     int: Concatenated integer of the first and last digit, or 0 if not found.
     """
-    first_digit = next(
-        (character for character in input_string if character.isdigit()), None
-    )
-    last_digit = next(
-        (character for character in reversed(input_string) if character.isdigit()), None
-    )
+    first_found_digit: Optional[str] = None
+    last_found_digit: Optional[str] = None
 
-    if first_digit and last_digit:
-        return int(first_digit + last_digit)
-    else:
-        return 0
+    # Search for the first digit in the string.
+    for character in input_string:
+        if character.isdigit():
+            first_found_digit = character
+            break
+
+    # Search for the last digit in the string, starting from the end.
+    for character in reversed(input_string):
+        if character.isdigit():
+            last_found_digit = character
+            break
+
+    # Return concatenated digits as an integer, or 0 if not found.
+    return (
+        int(first_found_digit + last_found_digit)
+        if first_found_digit and last_found_digit
+        else 0
+    )
 
 
 def find_first_match_in_string(
