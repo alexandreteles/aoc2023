@@ -87,7 +87,7 @@ if __name__ == "__main__":
         input_data: list[str] = file.read().splitlines()
 
     # Print sum of first and last digits extracted from each line.
-    print(f"Step 1: {sum(list(map(extract_first_and_last_digits, input_data)))}")
+    print(f"Step 1: {sum(map(extract_first_and_last_digits, input_data))}")
 
     # Print sum from processing lines with combined target strings and input data.
     print(f"Step 2: {process_and_sum_lines(NUMERAL_STRINGS + WORD_DIGITS, input_data)}")
