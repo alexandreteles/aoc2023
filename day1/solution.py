@@ -17,15 +17,6 @@ WORD_DIGITS: list[str] = [
 
 
 def extract_first_and_last_digits(input_string: str) -> int:
-    """
-    Extracts the first and last digits from a string and concatenates them into an integer.
-
-    Args:
-    input_string (str): The string from which to extract digits.
-
-    Returns:
-    int: Concatenated integer of the first and last digit, or 0 if not found.
-    """
     first_found_digit: Optional[str] = None
     last_found_digit: Optional[str] = None
 
@@ -52,17 +43,6 @@ def extract_first_and_last_digits(input_string: str) -> int:
 def find_first_match_in_string(
     text_string: str, match_targets: list[str], search_backwards: bool = False
 ) -> Optional[int]:
-    """
-    Searches for the first occurrence of any target strings in a given text string.
-
-    Args:
-    text_string (str): The text to search through.
-    match_targets (list[str]): Target strings to find in the text.
-    search_backwards (bool, optional): If True, the search is performed in reverse. Defaults to False.
-
-    Returns:
-    Optional[int]: Index of the first matched target string, or None if no match is found.
-    """
     # Generate positions in the text to start the search, optionally in reverse.
     search_positions = (
         range(len(text_string))
@@ -83,17 +63,6 @@ def find_first_match_in_string(
 
 
 def process_and_sum_lines(target_strings: list[str], input_lines: list[str]) -> int:
-    """
-    Processes a list of lines, searching for target strings and calculating a sum based on matching criteria.
-
-    Args:
-    target_strings (list[str]): Strings to match in each line.
-    input_lines (list[str]): Lines of text to process.
-
-    Returns:
-    int: Sum of values derived from processing each line.
-    """
-
     def calculate_line_value(current_line: str) -> int:
         # Search for matches in both forward and backward directions.
         match_forward = find_first_match_in_string(current_line, target_strings)
@@ -112,12 +81,13 @@ def process_and_sum_lines(target_strings: list[str], input_lines: list[str]) -> 
     return sum(map(calculate_line_value, input_lines))
 
 
-# Read input file located in the same directory as this script.
-with open(os.path.join(os.path.dirname(__file__), "input"), "r") as file:
-    input_data: list[str] = file.read().splitlines()
+if __name__ == "__main__":
+    # Read input file located in the same directory as this script.
+    with open(os.path.join(os.path.dirname(__file__), "input"), "r") as file:
+        input_data: list[str] = file.read().splitlines()
 
-# Print sum of first and last digits extracted from each line.
-print(f"Step 1: {sum(list(map(extract_first_and_last_digits, input_data)))}")
+    # Print sum of first and last digits extracted from each line.
+    print(f"Step 1: {sum(list(map(extract_first_and_last_digits, input_data)))}")
 
-# Print sum from processing lines with combined target strings and input data.
-print(f"Step 2: {process_and_sum_lines(NUMERAL_STRINGS + WORD_DIGITS, input_data)}")
+    # Print sum from processing lines with combined target strings and input data.
+    print(f"Step 2: {process_and_sum_lines(NUMERAL_STRINGS + WORD_DIGITS, input_data)}")
